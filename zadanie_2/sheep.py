@@ -6,7 +6,7 @@ class Sheep:
     def __init__(self, init_pos_limit: float, sheep_move_dist: float):
         self.init_pos_limit = init_pos_limit
         self.sheep_move_dist = sheep_move_dist
-        self.position = (self.__initialize_sheep_position(), self.__initialize_sheep_position())
+        self.position = [self.__initialize_sheep_position(), self.__initialize_sheep_position()]
 
     def __initialize_sheep_position(self) -> float:
         return random.uniform(-self.init_pos_limit, self.init_pos_limit)
