@@ -1,5 +1,6 @@
-# TODO maybe it is good idea to make class 'Animals' and this class should inherit this class
 import random
+
+from direction import Direction
 
 
 class Sheep:
@@ -11,9 +12,18 @@ class Sheep:
     def __initialize_sheep_position(self) -> float:
         return random.uniform(-self.init_pos_limit, self.init_pos_limit)
 
-    def choose_move_direction(self):
+    def move(self):
         """
-        random (0-4) and assign nuber to direction f.g 1 == north
+        random (0-4) and assign number to direction f.g 1 == north
         :return:
         """
-        pass
+        random_direction = random.randint(0, 4)
+        # with python 3.10 it is possible to do switch case and it would be better in this case :)
+        if random_direction == Direction.NORTH:
+            self.position = [self.position[0], self.position[1] + self.sheep_move_dist]
+        elif random_direction == Direction.SOUTH:
+            self.position = [self.position[0], self.position[1] - self.sheep_move_dist]
+        elif random_direction == Direction.EAST:
+            self.position = [self.position[0] + self.sheep_move_dist, self.position[1]]
+        elif random_direction == Direction.WEST:
+            self.position = [self.position[0] - self.sheep_move_dist, self.position[1]]
