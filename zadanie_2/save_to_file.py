@@ -1,6 +1,6 @@
 import json
 import os
-
+import csv
 
 class Save:
     @staticmethod
@@ -17,5 +17,7 @@ class Save:
             json.dump(data, file)
 
     @staticmethod
-    def to_csv():
+    def to_csv(turn: int, sheep_alive: int):
+        # TODO
         pass
+
