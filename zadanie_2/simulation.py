@@ -30,8 +30,6 @@ class Simulation:
         self.sheep = [Sheep(init_pos_limit, sheep_move_dist) for _ in range(self.number_of_sheep)]
         self.nearest_sheep_index: int = 0
 
-
-
     def search_nearest_sheep(self) -> list:
         """
         loop through all sheep and return position of nearest one
