@@ -19,6 +19,20 @@ def remove_json_if_exist(func):
     return wrapper
 
 
+def remove_csv_if_exist(func):
+    import os
+
+    def wrapper(*args):
+        if os.path.exists(os.path.join(os.getcwd(), "alive.csv")):
+            os.remove(os.path.join(os.getcwd(), "alive.csv"))
+
+        with open(os.path.join(os.getcwd(), "alive.csv"), 'a') as file:
+            file.write('numer tury,liczba zywych owiec\n')
+
+        func(*args)
+    return wrapper
+
+
 class Simulation:
     def __init__(self, round_number: int, number_of_sheep: int, init_pos_limit: float, sheep_move_dist: float, wolf_move_dist: float):
         self.round_number = round_number
@@ -71,6 +85,7 @@ class Simulation:
             self.wolf.move_to_nearest_sheep(nearest_sheep_pos)
 
     @remove_json_if_exist
+    @remove_csv_if_exist
     def simulate(self):
         """
         this method play simulation as many time as given round
@@ -88,3 +103,4 @@ class Simulation:
             # TODO: albo wartość None/null w przypadku owiec, które zostały pożarte).
 
             Save.to_json(data_to_save)
+            Save.to_csv(turn, len(self.sheep))
