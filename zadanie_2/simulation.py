@@ -89,4 +89,3 @@ class Simulation:
             # TODO: albo wartość None/null w przypadku owiec, które zostały pożarte).
 
             Save.to_json(data_to_save)
-

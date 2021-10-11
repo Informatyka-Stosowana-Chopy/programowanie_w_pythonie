@@ -21,4 +21,3 @@ class Save:
     def to_csv(turn: int, sheep_alive: int):
         # TODO
         pass
-
