@@ -84,7 +84,6 @@ class Simulation:
                 return
             self.one_simulation_round()
             self.__print_round_info(turn + 1)  # to print index starting at 1
-
             data_to_save = {"round_no": turn + 1, "wolf_pos": self.wolf.position, "sheep_pos": [sheep.position for sheep in self.sheep]}
             # TODO: albo wartość None/null w przypadku owiec, które zostały pożarte).
 
