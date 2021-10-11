@@ -2,6 +2,7 @@ import json
 import os
 import csv
 
+
 class Save:
     @staticmethod
     def to_json(dict_to_save: dict):

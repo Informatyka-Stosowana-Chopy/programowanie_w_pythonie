@@ -3,7 +3,6 @@ from sheep import Sheep
 from save_to_file import Save
 
 
-
 # Decorator
 def remove_json_if_exist(func):
     import json
