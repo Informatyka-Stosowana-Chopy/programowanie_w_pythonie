@@ -19,7 +19,6 @@ class Save:
 
     @staticmethod
     def to_csv(turn: int, sheep_alive: int):
-        # TODO
         with open(os.path.join(os.getcwd(), "alive.csv"), 'a', newline="") as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow([turn, sheep_alive])

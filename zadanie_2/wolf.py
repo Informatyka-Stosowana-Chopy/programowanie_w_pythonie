@@ -19,6 +19,8 @@ class Wolf:
 
     def move_to_nearest_sheep(self, sheep_position: list):
         """
+        TODO
+            it should move everywhere, now it is only in x and y
         it should move
         :return:
         """
