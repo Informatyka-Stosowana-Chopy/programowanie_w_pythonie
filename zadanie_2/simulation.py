@@ -103,4 +103,4 @@ class Simulation:
             # TODO: albo wartość None/null w przypadku owiec, które zostały pożarte).
 
             Save.to_json(data_to_save)
-            Save.to_csv(turn, len(self.sheep))
+            Save.to_csv(turn + 1, len(self.sheep))
