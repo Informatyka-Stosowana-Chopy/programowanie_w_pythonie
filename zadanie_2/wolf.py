@@ -1,6 +1,10 @@
+from math import sqrt
+import logging
+
 class Wolf:
     def __init__(self, wolf_move_dist: float):
         self.position = [0.0, 0.0]
+        logging.info("Wolf starting position = [0.0, 0.0]")
         self.wolf_move_dist = wolf_move_dist
 
     def check_if_can_attack(self, nearest_sheep_pos: list) -> bool:
@@ -10,33 +14,24 @@ class Wolf:
         else return False
         :return:
         """
-        # TODO check if it is good. probably it should check sqrt(2) to make an radius not in linear
-        if (abs(self.position[0] - nearest_sheep_pos[0]) <= self.wolf_move_dist and abs(self.position[1] <=
-            nearest_sheep_pos[1])) or abs(self.position[1] - nearest_sheep_pos[1]) <= self.wolf_move_dist and \
-                abs(self.position[0] <= nearest_sheep_pos[0]):
+        logging.debug(f"Wolf - check if can attack arg: nearest_sheep_pos = {nearest_sheep_pos}, return: bool")
+        if sqrt((self.position[0] - nearest_sheep_pos[0])**2 + (self.position[1] - nearest_sheep_pos[1])**2) <= self.wolf_move_dist:
             return True
         return False
 
     def move_to_nearest_sheep(self, sheep_position: list):
         """
-        TODO
-            it should move everywhere, now it is only in x and y
         it should move
         :return:
         """
-        # sheep_pos - woolf_pos = [x, y] then if x > y move to x else to y
-        distance = [abs(sheep_position[0] - self.position[0]), abs(sheep_position[1] - self.position[1])]
+        logging.debug(f"Wolf - move to nearest sheep arg: sheep_position = {sheep_position}")
+        # sheep_pos - woolf_pos = [x, y]
+        distance = [sheep_position[0] - self.position[0], sheep_position[1] - self.position[1]]
 
-        # in this case we check if it is better to move in x or y direction
-        if distance[0] >= distance[1]:
-            pos = 0
-        else:
-            pos = 1
+        distance_between_points = sqrt((self.position[0] - sheep_position[0]) ** 2 + (self.position[1] - sheep_position[1]) ** 2)
 
-        # there we check if it move in + or - direciton
-        if sheep_position[pos] > self.position[pos]:
-            self.position[pos] = self.position[pos] + self.wolf_move_dist
-        else:
-            self.position[pos] = self.position[pos] - self.wolf_move_dist
-
-        # TODO make test to check if it is working, probably I made a mistake with +/- or </> somewhere
+        x_to_move = (self.wolf_move_dist * distance[0])/ distance_between_points
+        y_to_move = (self.wolf_move_dist * distance[1]) / distance_between_points
+        logging.info(f"Wolf moved from {self.position} to [{self.position[0] + x_to_move}, {self.position[1] + y_to_move}]")
+        self.position[0] += x_to_move
+        self.position[1] += y_to_move
