@@ -8,11 +8,11 @@ class Sheep:
         self.init_pos_limit = init_pos_limit
         self.sheep_move_dist = sheep_move_dist
         self.position = [self.__initialize_sheep_position(), self.__initialize_sheep_position()]
+        logging.info(f"sheep starting possition: {self.position}")
 
     def __initialize_sheep_position(self) -> float:
-        logging.debug("Sheep - initialize position, return: float (-init_pos_limit, init_pos_limit)")
         random_numer = random.uniform(-self.init_pos_limit, self.init_pos_limit)
-        logging.info(f"sheep starting possition: {random_numer}")
+        logging.debug(f"Sheep - initialize position, return: {random_numer}")
         return random_numer
 
     def move(self):

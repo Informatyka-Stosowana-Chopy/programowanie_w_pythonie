@@ -1,6 +1,6 @@
 import argparse
 import configparser
-
+import logging
 from simulation import Simulation
 
 ##########################################
@@ -43,7 +43,11 @@ args = parser.parse_args()
 if args.dir:
     DIR_TO_SAVE = args.dir  # podkatalog gdzie zapisane są pliki
 if args.log:
-    LOG_LEVEL = args.log  # logi tylko o tej i wyższej własności są zapisywane
+    logging.basicConfig(filename='chase.log',
+                        filemode='a',
+                        format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+                        datefmt='%H:%M:%S',
+                        level=args.log)  # logi tylko o tej i wyższej własności są zapisywane
 if args.rounds:
     ROUND_NUMBER = args.round
 if args.sheep:
@@ -64,6 +68,11 @@ if args.config:
     wolf_move_dist = float(config['Movement']['WolfMoveDist'])
     if sheep_move_dist < 0 or wolf_move_dist < 0:
         raise ValueError
+
+##########################################
+# LOGGING
+##########################################
+
 ##########################################
 # MAIN
 ##########################################
