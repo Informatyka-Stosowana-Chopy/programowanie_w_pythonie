@@ -1,4 +1,6 @@
 import argparse
+import configparser
+
 from simulation import Simulation
 
 ##########################################
@@ -10,8 +12,9 @@ init_pos_limit = 10.0
 sheep_move_dist = 0.5
 wolf_move_dist = 1.0
 DIR_TO_SAVE = None
+WAIT = False
 ##########################################
-# PARSER
+# ARG PARSER
 ##########################################
 
 parser = argparse.ArgumentParser(description="Process some integers.")
@@ -31,14 +34,12 @@ parser.add_argument('-w', '--wait', type=int, help="Określa, że po wyświetlan
                                                    "powinien zostać zatrzymany aż do naciśnięcia przez użytkownika "
                                                    "jakiegoś klawisza. ")
 
-parser.add_argument('-h', '--help', help="Program przeprowadza symulację gdzie wilk goni najbliższą mu owcę."
-                                         "jeżeli owca jest w zasięgu wilka to ją zjada i staje na jej miejscu, "
-                                         "po każdej turze wszystkie owce się poruszają"
-                                         "i wilk też")
+# parser.add_argument('-h', '--help', help="Program przeprowadza symulację gdzie wilk goni najbliższą mu owcę."
+#                                          "jeżeli owca jest w zasięgu wilka to ją zjada i staje na jej miejscu, "
+#                                          "po każdej turze wszystkie owce się poruszają"
+#                                          "i wilk też") TODO
+
 args = parser.parse_args()
-print(args)
-if args.config:
-    CONFIG_FILE = args.config
 if args.dir:
     DIR_TO_SAVE = args.dir  # podkatalog gdzie zapisane są pliki
 if args.log:
@@ -50,12 +51,25 @@ if args.sheep:
 if args.wait:
     WAIT = True
 
+##########################################
+# CONFIG PARSER
+##########################################
+if args.config:
+    config = configparser.ConfigParser()
+    CONFIG_FILE = args.config
+    config.read(CONFIG_FILE)
 
+    init_pos_limit = float(config['Terrain']['InitPosLimit'])
+    sheep_move_dist = float(config['Movement']['SheepMoveDist'])
+    wolf_move_dist = float(config['Movement']['WolfMoveDist'])
+    if sheep_move_dist < 0 or wolf_move_dist < 0:
+        raise ValueError
 ##########################################
 # MAIN
 ##########################################
 
 # if not args.help:
-#     wolf_and_sheep = Simulation(ROUND_NUMBER, SHEEP_NUMBER, init_pos_limit, sheep_move_dist, wolf_move_dist, WAIT, DIR_TO_SAVE)
-#
-#     wolf_and_sheep.simulate()
+wolf_and_sheep = Simulation(ROUND_NUMBER, SHEEP_NUMBER, init_pos_limit, sheep_move_dist, wolf_move_dist, WAIT,
+                            DIR_TO_SAVE)
+
+wolf_and_sheep.simulate()

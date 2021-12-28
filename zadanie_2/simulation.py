@@ -5,6 +5,7 @@ from sheep import Sheep
 from wolf import Wolf
 import logging
 
+
 # Decorators
 def remove_json_if_exist(func):
     import json
@@ -112,10 +113,10 @@ class Simulation:
             self.wolf.position = nearest_sheep_pos
             try:
                 self.sheep[self.nearest_sheep_index] = None
-            except:
-                logging.warning("no sheep index")
+            except IndexError:
+                logging.error("no sheep index")
 
-            logging.info(f"sheep {self.nearest_sheep_index + 1} has been eaten")
+            logging.info(f"sheep {self.nearest_sheep_index} has been eaten")
             print(f"Owca {self.nearest_sheep_index} została zjedzona!\n")
         else:
             self.wolf.move_to_nearest_sheep(nearest_sheep_pos)

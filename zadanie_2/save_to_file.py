@@ -27,7 +27,7 @@ class Save:
         if dir_to_save is not None:
             PATH = dir_to_save
         else:
-            PATH = os.path.join(os.getcwd(), "pos.json")
+            PATH = os.path.join(os.getcwd(), "alive.csv")
 
         with open(PATH, 'a', newline="") as file:
             csv_writer = csv.writer(file)
