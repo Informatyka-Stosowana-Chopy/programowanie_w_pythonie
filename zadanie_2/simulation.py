@@ -1,6 +1,7 @@
 from wolf import Wolf
 from sheep import Sheep
 from save_to_file import Save
+from math import *
 
 
 # Decorators
@@ -50,11 +51,12 @@ class Simulation:
         :return: list with position of nearest sheep
         """
         index_of_nearest_sheep = 0
-        nearest_sheep_distance = abs(self.wolf.position[0] - self.sheep[0].position[0]) \
-                               + abs(self.wolf.position[1] - self.sheep[0].position[1])
+        nearest_sheep_distance = sqrt((abs(self.wolf.position[0] - self.sheep[0].position[0])) ** 2
+                                      + (abs(self.wolf.position[1] - self.sheep[0].position[1])) ** 2)
 
         for i, sheep in enumerate(self.sheep):
-            distance = abs(self.wolf.position[0] - sheep.position[0]) + abs(self.wolf.position[1] - sheep.position[1])
+            distance = sqrt((abs(self.wolf.position[0] - sheep.position[0])) ** 2
+                                      + (abs(self.wolf.position[1] - sheep.position[1])) ** 2)
             if distance < nearest_sheep_distance:
                 nearest_sheep_distance = distance
                 index_of_nearest_sheep = i
