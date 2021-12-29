@@ -12,10 +12,10 @@ def remove_json_if_exist(func):
     import os
 
     def wrapper(*args):
-        if os.path.exists(os.path.join(os.getcwd(), "pos.json")):
-            os.remove(os.path.join(os.getcwd(), "pos.json"))
+        if os.path.exists(os.path.join(os.getcwd(), "../pos.json")):
+            os.remove(os.path.join(os.getcwd(), "../pos.json"))
 
-        with open(os.path.join(os.getcwd(), "pos.json"), 'a') as file:
+        with open(os.path.join(os.getcwd(), "../pos.json"), 'a') as file:
             json.dump([], file)
 
         func(*args)
@@ -27,10 +27,10 @@ def remove_csv_if_exist(func):
     import os
 
     def wrapper(*args):
-        if os.path.exists(os.path.join(os.getcwd(), "alive.csv")):
-            os.remove(os.path.join(os.getcwd(), "alive.csv"))
+        if os.path.exists(os.path.join(os.getcwd(), "../alive.csv")):
+            os.remove(os.path.join(os.getcwd(), "../alive.csv"))
 
-        with open(os.path.join(os.getcwd(), "alive.csv"), 'a') as file:
+        with open(os.path.join(os.getcwd(), "../alive.csv"), 'a') as file:
             file.write('numer tury,liczba zywych owiec\n')
 
         func(*args)
